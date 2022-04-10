@@ -8,7 +8,7 @@ PeopleSoft is a desktop app for **calculating the salary for shift-based contrac
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
-You can also generate a PDF payslip for your employees to refer to.
+You can also generate a `csv` payslip for your employees to refer to.
 
 ## How to use this guide
 
@@ -25,12 +25,12 @@ You can also generate a PDF payslip for your employees to refer to.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Words in parentheses are required, and denote that one of the given choices (delimited by the pipe symbol `|`) are to be selected.<br>
-  e.g. `personfind (*|NAME)` means that `personfind *` and `personfind John` are valid commands.
+  e.g. `personfind (TAG|NAME)` means that `find Hardware` and `find John` are valid commands.
 
 </div>
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,8 +46,8 @@ You can also generate a PDF payslip for your employees to refer to.
 
 <br><br>
 
-   ![Ui](images/Ui.png)<br>
-   _The PeopleSoft interface_
+![Ui](images/Ui.png)<br>
+_The PeopleSoft interface_
 
 <br><br>
 
@@ -60,23 +60,24 @@ You can also generate a PDF payslip for your employees to refer to.
 
 A handy reference for more experienced users who just need to know the format of a command.
 
-| Command     | Format                                                                                      | Examples                                                                                                   |
-|-------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `personadd` | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                      | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
-| `personedit` | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                           |
-| `persondelete` | `persondelete PERSON_INDEX`                                                                 | `persondelete 3`                                                                                           |
-| `personfind` | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                    | `find Nicole Hardware`, `personfind Aircon`                                                                |
-| `personlist` | `personlist`                                                                                | NA                                                                                                         |
-| `clear`     | `clear`                                                                                     | NA                                                                                                         |
-| `add`       | `add n/NAME d/DURATION`                                                                     | `add n/Fix HDB Lock d/1`                                                                                   |
-| `find`      | `find NAME`                                                                                 | `find Painting`                                                                                            |
-| `list`      | `list`                                                                                      | NA                                                                                                         |
-| `delete`    | `delete JOB_INDEX`                                                                          | `delete 3`                                                                                                 |
-| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                      | `assign 2 i/1`                                                                                             |
-| `mark`      | `mark JOB_INDEX`                                                                            | `mark 2`                                                                                                   |
-| `pay`       | `pay JOB_INDEX y/`                                                                          | `pay 2 y/`                                                                                                 |
-| `exit`      | `exit`                                                                                      | NA                                                                                                         |
-| `help`      | `help`                                                                                      | NA                                                                                                         |
+| Command     | Format                                                                                   | Examples                                                                                                |
+|-------------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                         | `add n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
+| `edit`      | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                              |
+| `delete`    | `delete PERSON_INDEX`                                                                    | `delete 3`                                                                                              |
+| `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                                       | `find Nicole Hardware`, `find Aircon`                                                                   |
+| `list`      | `list`                                                                                   | NA
+| `export`    | `export PERSON_INDEX`                                                                    |  `export 3`                                                                                             |
+| `clear`     | `clear`                                                                                  | NA                                                                                                      |
+| `job`       | `job n/NAME d/DURATION`                                                                  | `job n/Fix HDB Lock d/1`                                                                                |
+| `jobfind`   | `jobfind NAME`                                                                           | `jobfind Painting`                                                                                      |
+| `joblist`   | `joblist`                                                                                | NA                                                                                                      |
+| `jobdelete` | `jobdelete JOB_INDEX`                                                                    | `jobdelete 3`                                                                                           |
+| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                   | `assign 2 i/1`                                                                                          |
+| `mark`      | `mark JOB_INDEX`                                                                         | `mark 2`                                                                                                |
+| `pay`       | `pay JOB_INDEX y/`                                                                       | `pay 2 y/`                                                                                              |
+| `exit`      | `exit`                                                                                   | NA
+| `help`      | `help`                                                                                   | NA                                                                                                      |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -86,7 +87,7 @@ A handy reference for more experienced users who just need to know the format of
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the attributes to be filled in by you.<br>
-  e.g. in `personadd n/NAME`, the `NAME` attribute could be `personadd n/John Doe`.
+  e.g. in `add n/NAME`, the `NAME` attribute could be `add n/John Doe`.
 
 * Attributes can be in any order.<br>
   e.g. if the command asks for `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also fine.
@@ -115,27 +116,27 @@ Adds a new employee to the system with the given attributes.
 
 Rate refers to the hourly pay of the employee.
 
-Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
 
-Example: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
+Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
 
-### Edit an employee’s information : `personedit`
+### Edit an employee’s information : `edit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
 Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed jobs will not change.
 
-Format: `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
+Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
-Example: `personedit 2 p/62353535` edits the second person's phone number to 62353535
+Example: `edit 2 p/62353535` edits the second person's phone number to 62353535
 
-### Delete an employee : `persondelete`
+### Delete an employee : `delete`
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
 
-Format: `persondelete PERSON_INDEX`
+Format: `delete PERSON_INDEX`
 
-Example: `persondelete 3` deletes the third person in the list
+Example: `delete 3` deletes the third person in the list
 
-### Search for a person by name or tag : `personfind`
+### Search for a person by name or tag : `find`
 Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
 If multiple tags are entered, only entries that match **all** tags are returned.
 
@@ -147,66 +148,74 @@ Examples:
 
 `personfind Nicole` finds all the employees named ‘Nicole’
 
-`personfind * Hardware` finds all employees tagged with ‘Hardware’
-
 `personfind Nicole Hardware Display` finds all employees named ‘Nicole’, tagged with BOTH 'Hardware' AND 'Display'
 
-### List all persons : `personlist`
+### List all persons : `list`
 Lists all the employees in the company.
 
-Format: `personlist`
+Format: `list`
 
-Example: `personlist` shows all the employees in the company
+Example: `list` shows all the employees in the company
 
 ### Clear all entries : `clear`
 
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
 
-[coming in v1.3] Require confirmation with a `yes clear` for clearing all data with `clear`.
-Format: `clear`
-
 Example: `clear` removes all the employees and jobs from the app
+
+
+### Export a person's information : `export`
+
+Export a `.csv` file with the person's name as file name, containing the jobs the contractor worked on, and the hours
+they worked for, and how much pay they should expect to receive this month.
+
+This helps contractors check if their hours and pay is accurately reflected. This increases the transparency of the SME
+they are working for.
+
+Format: `export PERSON_INDEX`
+
+Example: `export 3` exports the third person in the list
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Job-related commands
 
-### Add a job : `add`
+### Add a job : `job`
 
 Adds a new job to the system with the given attributes. `RATE` refers to how much the employee is paid per hour. `DURATION` refers to how long the job took.
 
-Format: `add n/NAME d/DURATION`
+Format: `job n/NAME d/DURATION`
 
-Example: `add 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
+Example: `job 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
 
-## Search for a job by name : `find`
+## Search for a job by name : `jobfind`
 
 Finds all jobs by a certain name.
 
-Format: `find NAME`
+Format: `jobfind NAME`
 
 Examples:
 
-`find Painting` finds all the jobs with 'Painting' in its name
+`jobfind Painting` finds all the jobs with 'Painting' in its name
 
-### List all jobs : `list`
+### List all jobs : `joblist`
 
 Lists all the jobs you have created, including jobs that have been paid for and those that have not been paid for yet.
 
-Format: `list`
+Format: `joblist`
 
-Example: `list` lists all the jobs you have created
+Example: `joblist` lists all the jobs you have created
 
-### Delete a job : `delete`
+### Delete a job : `jobdelete`
 
 Deletes the job that was referred to by the index.
 
 ❗️Caution: This is irreversible.
 
-Format: `delete JOB_INDEX`
+Format: `jobdelete JOB_INDEX`
 
-Example: `delete 2` deletes the second job
+Example: `jobdelete 2` deletes the second job
 
 ### Assign a job to an employee : `assign`
 
