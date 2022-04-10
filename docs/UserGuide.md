@@ -66,7 +66,8 @@ A handy reference for more experienced users who just need to know the format of
 | `edit`      | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                              |
 | `delete`    | `delete PERSON_INDEX`                                                                    | `delete 3`                                                                                              |
 | `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                                       | `find Nicole Hardware`, `find Aircon`                                                                   |
-| `list`      | `list`                                                                                   | NA                                                                                                      |
+| `list`      | `list`                                                                                   | NA    
+| `export`    | `export PERSON_INDEX`                                                                    |  `export 3`                                                                                             |
 | `clear`     | `clear`                                                                                  | NA                                                                                                      |
 | `job`       | `job n/NAME d/DURATION`                                                                  | `job n/Fix HDB Lock d/1`                                                                                |
 | `jobfind`   | `jobfind NAME`                                                                           | `jobfind Painting`                                                                                      |
@@ -75,7 +76,7 @@ A handy reference for more experienced users who just need to know the format of
 | `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                   | `assign 2 i/1`                                                                                          |
 | `mark`      | `mark JOB_INDEX`                                                                         | `mark 2`                                                                                                |
 | `pay`       | `pay JOB_INDEX y/`                                                                       | `pay 2 y/`                                                                                              |
-| `exit`      | `exit`                                                                                   | NA                                                                                                      |
+| `exit`      | `exit`                                                                                   | NA
 | `help`      | `help`                                                                                   | NA                                                                                                      |
 --------------------------------------------------------------------------------------------------------------------
 
@@ -163,10 +164,20 @@ Example: `list` shows all the employees in the company
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
 
-[coming in v1.3] Require confirmation with a `yes clear` for clearing all data with `clear`.
-Format: `clear`
-
 Example: `clear` removes all the employees and jobs from the app
+
+
+### Export a person's information : `export`
+
+Export a `.csv` file with the person's name as file name, containing the jobs the contractor worked on, and the hours 
+they worked for, and how much pay they should expect to receive this month.
+
+This helps contractors check if their hours and pay is accurately reflected. This increases the transparency of the SME
+they are working for.
+
+Format: `export PERSON_INDEX`
+
+Example: `export 3` exports the third person in the list
 
 --------------------------------------------------------------------------------------------------------------------
 
