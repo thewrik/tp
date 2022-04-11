@@ -2,13 +2,14 @@
 layout: page
 title: User Guide
 ---
+Welcome to PeopleSoft!
 
 PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
 
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
-You can also generate a PDF payslip for your employees to refer to.
+You can also generate a `CSV` payslip for your employees to refer to.
 
 ## How to use this guide
 
@@ -65,8 +66,9 @@ A handy reference for more experienced users who just need to know the format of
 | `personadd` | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                      | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
 | `personedit` | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                           |
 | `persondelete` | `persondelete PERSON_INDEX`                                                                 | `persondelete 3`                                                                                           |
-| `personfind` | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                    | `find Nicole Hardware`, `personfind Aircon`                                                                |
+| `personfind` | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                    | `personfind Nicole Hardware`, `personfind Aircon`                                                                |
 | `personlist` | `personlist`                                                                                | NA                                                                                                         |
+| `export`    | `export PERSON_INDEX`                                                                       | `export 2`                                                                                                 |
 | `clear`     | `clear`                                                                                     | NA                                                                                                         |
 | `add`       | `add n/NAME d/DURATION`                                                                     | `add n/Fix HDB Lock d/1`                                                                                   |
 | `find`      | `find NAME`                                                                                 | `find Painting`                                                                                            |
@@ -109,7 +111,7 @@ A handy reference for more experienced users who just need to know the format of
 
 ## Employee-related commands
 
-### Add an employee : `add`
+### Add an employee : `personadd`
 
 Adds a new employee to the system with the given attributes.
 
@@ -139,15 +141,13 @@ Example: `persondelete 3` deletes the third person in the list
 Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
 If multiple tags are entered, only entries that match **all** tags are returned.
 
-Format: `personfind (*|NAME) [TAG]...​`
+Format: `personfind [NAME] [TAG]...​`
 
 Examples:
 
 `personfind Nicole Hardware` finds all the employees named ‘Nicole’, with the ‘Hardware’ tag
 
 `personfind Nicole` finds all the employees named ‘Nicole’
-
-`personfind * Hardware` finds all employees tagged with ‘Hardware’
 
 `personfind Nicole Hardware Display` finds all employees named ‘Nicole’, tagged with BOTH 'Hardware' AND 'Display'
 
@@ -157,6 +157,18 @@ Lists all the employees in the company.
 Format: `personlist`
 
 Example: `personlist` shows all the employees in the company
+
+### Export a person's information : `export`
+
+Export a `.csv` file with the person's name as file name, containing the jobs the contractor worked on, and the hours
+they worked for, and how much pay they should expect to receive this month.
+
+This helps contractors check if their hours and pay is accurately reflected. This increases the transparency of the SME
+they are working for.
+
+Format: `export PERSON_INDEX`
+
+Example: `export 3` exports the third person in the list
 
 ### Clear all entries : `clear`
 
@@ -284,6 +296,9 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 ## Glossary
 
-**Index**: The item's number in a list.
-
+**Index**: The item's number in a list. 
 e.g. The second person in the list has an `INDEX` of 2.
+
+**Command-line Interface (CLI)**:	An interface which involves the users typing text and executing it as commands.
+
+
