@@ -93,17 +93,17 @@ A handy reference for more experienced users who just need to know the format of
 * Attributes can be in any order.<br>
   e.g. if the command asks for `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also fine.
 
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be typed as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `...​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]...​` can be used as `t/friend`, `t/friend t/family` or even 0 times.
-
 * If an attribute is expected only once, but you type it multiple times, only the last occurrence of the attribute will be taken.<br>
   e.g. if you specify `n/Jake n/Jason`, only `n/Jason` will be taken.
 
 * For commands that do not need attributes, (like `help`, `list`, `exit` and `clear`) anything typed after the command word will be ignored.<br>
   e.g. typing `help 123`, it will be interpreted as `help`.
+
+* Items in square brackets are optional.<br>
+  e.g. `n/NAME [t/TAG]` can be typed as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `...​` after them can be used multiple times or not at all.<br>
+  e.g. `[t/TAG]...​` can be used as `t/friend`, `t/friend t/family`
 
 </div>
 
@@ -111,7 +111,7 @@ A handy reference for more experienced users who just need to know the format of
 
 ## Employee-related commands
 
-### Add an employee : `personadd`
+### How to add an employee ? `personadd`
 
 Adds a new employee to the system with the given attributes.
 
@@ -121,7 +121,7 @@ Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG
 
 Example: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
 
-### Edit an employee’s information : `personedit`
+### How to edit an employee’s information ? `personedit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
 Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed jobs will not change.
@@ -130,14 +130,14 @@ Format: `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
 
 Example: `personedit 2 p/62353535` edits the second person's phone number to 62353535
 
-### Delete an employee : `persondelete`
+### How to delete an employee's information ? `persondelete`
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
 
 Format: `persondelete PERSON_INDEX`
 
 Example: `persondelete 3` deletes the third person in the list
 
-### Search for a person by name or tag : `personfind`
+### How to search for a person by name or tag ? `personfind`
 Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
 If multiple tags are entered, only entries that match **all** tags are returned.
 
@@ -151,14 +151,14 @@ Examples:
 
 `personfind Nicole Hardware Display` finds all employees named ‘Nicole’, tagged with BOTH 'Hardware' AND 'Display'
 
-### List all persons : `personlist`
+### How to list all persons ? `personlist`
 Lists all the employees in the company.
 
 Format: `personlist`
 
 Example: `personlist` shows all the employees in the company
 
-### Export a person's information : `export`
+### How to export a person's information ? `export`
 
 Export a `.csv` file with the person's name as file name, containing the jobs the contractor worked on, and the hours
 they worked for, and how much pay they should expect to receive this month.
@@ -170,7 +170,7 @@ Format: `export PERSON_INDEX`
 
 Example: `export 3` exports the third person in the list
 
-### Clear all entries : `clear`
+### How to clear all entries ? `clear`
 
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
@@ -184,15 +184,16 @@ Example: `clear` removes all the employees and jobs from the app
 
 ## Job-related commands
 
-### Add a job : `add`
+### How to add a job ? `add`
 
-Adds a new job to the system with the given attributes. `RATE` refers to how much the employee is paid per hour. `DURATION` refers to how long the job took.
+Adds a new job to the system with the given attributes. `RATE` refers to how much the employee is paid per hour. 
+`DURATION` refers to how long the job took. The payment is calculated accordingly.
 
 Format: `add n/NAME d/DURATION`
 
 Example: `add 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
 
-## Search for a job by name : `find`
+## How to earch for a job by name ? `find`
 
 Finds all jobs by a certain name.
 
@@ -202,7 +203,7 @@ Examples:
 
 `find Painting` finds all the jobs with 'Painting' in its name
 
-### List all jobs : `list`
+### How to list all jobs ? `list`
 
 Lists all the jobs you have created, including jobs that have been paid for and those that have not been paid for yet.
 
@@ -210,7 +211,7 @@ Format: `list`
 
 Example: `list` lists all the jobs you have created
 
-### Delete a job : `delete`
+### How to delete a job ? `delete`
 
 Deletes the job that was referred to by the index.
 
@@ -220,7 +221,7 @@ Format: `delete JOB_INDEX`
 
 Example: `delete 2` deletes the second job
 
-### Assign a job to an employee : `assign`
+### How to assign a job to an employee ? `assign`
 
 Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-done-or-not-done--mark) job cannot be assigned to
 any person.
@@ -229,7 +230,7 @@ Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
 Example: `assign 2 i/3` assigns the second job to the third employee
 
-### Mark a job as done or not done : `mark`
+### How to mark a job as done or not done ? `mark`
 
 Indicates that a job has been completed and is pending payment. To un-mark a job, `mark` the job again.
 A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
@@ -243,7 +244,7 @@ Example: `mark 2` marks the second job, assuming it is not already marked as com
 
 Example: `mark 2` un-marks the second job after the previous example is performed
 
-### Finalize payments for a job : `pay`
+### How to finalize payments for a job ? `pay`
 
 Finalizes the payments of a job. This command is irreversible, and the finalized job cannot be
 modified in any way except by `clear`. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
@@ -257,12 +258,12 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 ## Miscellaneous commands
 
-### Exit the program : `exit`
+### How to exit the program ? `exit`
 Exits the program immediately.
 
 Format: `exit`
 
-### List all the commands: `help`
+### How to find all the commands if you need help? `help`
 Opens the help page which shows the command list like the one above.
 
 Format: `help`
